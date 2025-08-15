@@ -9,20 +9,22 @@ import Navbar from "./components/Navbar";
 import { AppContext } from "./context/AppContext";
 import MyOrders from "./pages/MyOrders";
 import Auth from "./pages/Auth";
+import ProductCategory from "./pages/ProductCategory";
 
 const App = () => {
   const { isSeller, showUserLogin } = useContext(AppContext);
   const isSellerPath = useLocation().pathname.includes("seller");
 
   return (
-    <div>
+    <div className="text-default min-h-screen">
       {isSellerPath ? null : <Navbar />}
       {showUserLogin ? <Auth /> : null}
-      <div>
+      <div className="px-6 md:px-16 lg:px-4 xl:px-32">
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/products" element={<Products />} />
           <Route path="/product/:id" element={<ProductDetails />} />
+          <Route path="/products/:category" element={<ProductCategory />} />
           <Route path="/cart" element={<Cart />} />
           <Route path="/my-orders" element={<MyOrders />} />
         </Routes>
