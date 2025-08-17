@@ -208,6 +208,7 @@ export const dummyProducts = [
     category: "Vegetables",
     price: 25,
     offerPrice: 20,
+    rating: 3,
     image: [potato_image_1, potato_image_2, potato_image_3, potato_image_4],
     description: [
       "Fresh and organic",

@@ -28,17 +28,23 @@ const ProductCard = ({ product }) => {
             {product.name}
           </p>
           <div className="flex items-center gap-0.5">
-            {Array(5)
-              .fill("")
-              .map((_, i) => (
-                <img
-                  key={i}
-                  src={i < 4 ? assets.star_icon : assets.star_dull_icon}
-                  alt="rating"
-                  className="w-3 md:w-3.5"
-                />
-              ))}
-            <p>({product.rating})</p>
+            {Array.from({ length: product.rating ?? 0 }).map((_, i) => (
+              <img
+                key={i}
+                src={assets.star_icon}
+                alt="rating"
+                className="w-3 md:w-3.5"
+              />
+            ))}
+            {Array.from({ length: 5 - (product.rating ?? 0) }).map((_, i) => (
+              <img
+                key={i + (product.rating ?? 0)}
+                src={assets.star_dull_icon}
+                alt="rating"
+                className="w-3 md:w-3.5"
+              />
+            ))}
+            <p>({product.rating ?? 0})</p>
           </div>
           <div className="flex items-end justify-between mt-3">
             <p className="md:text-xl text-base font-medium text-indigo-500">
