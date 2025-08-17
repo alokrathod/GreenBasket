@@ -1,5 +1,6 @@
 import React, { useContext } from "react";
 import { Routes, Route, useLocation } from "react-router-dom";
+import { Toaster } from "react-hot-toast";
 
 import Home from "./pages/Home";
 import Products from "./pages/Products";
@@ -20,6 +21,7 @@ const App = () => {
     <div className="text-default min-h-screen">
       {isSellerPath ? null : <Navbar />}
       {showUserLogin ? <Auth /> : null}
+      <Toaster />
       <div className="px-6 md:px-16 lg:px-4 xl:px-32">
         <Routes>
           <Route path="/" element={<Home />} />
