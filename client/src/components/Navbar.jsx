@@ -19,6 +19,7 @@ const Navbar = () => {
   useEffect(() => {
     if (searchQuery.length > 0) {
       navigate("/products");
+      scrollTo(0, 0);
     }
   }, [searchQuery]);
 
@@ -68,6 +69,7 @@ const Navbar = () => {
         <div
           onClick={() => {
             navigate("/cart");
+            scrollTo(0, 0);
           }}
           className="relative cursor-pointer"
         >
@@ -85,6 +87,7 @@ const Navbar = () => {
                 <li
                   onClick={() => {
                     navigate("/my-orders");
+                    scrollTo(0, 0);
                   }}
                   className="p-1.5 cursor-pointer"
                 >
