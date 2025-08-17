@@ -10,6 +10,7 @@ import { AppContext } from "./context/AppContext";
 import MyOrders from "./pages/MyOrders";
 import Auth from "./pages/Auth";
 import ProductCategory from "./pages/ProductCategory";
+import Footer from "./components/Footer";
 
 const App = () => {
   const { isSeller, showUserLogin } = useContext(AppContext);
@@ -23,12 +24,13 @@ const App = () => {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/products" element={<Products />} />
-          <Route path="/product/:id" element={<ProductDetails />} />
+          <Route path="/product/:category/:id" element={<ProductDetails />} />
           <Route path="/products/:category" element={<ProductCategory />} />
           <Route path="/cart" element={<Cart />} />
           <Route path="/my-orders" element={<MyOrders />} />
         </Routes>
       </div>
+      {isSellerPath ? null : <Footer />}
     </div>
   );
 };
