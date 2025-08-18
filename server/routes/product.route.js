@@ -7,11 +7,11 @@ import {
   getAllProducts,
   getProductById,
 } from "../controllers/product.controller.js";
-import { upload } from "../config/multer.js";
+import { multipleUpload } from "../middlewares/multer.middleware.js";
 
 const router = express.Router();
 
-router.post("/add", authSeller, upload.array("image", 4), addProduct);
+router.post("/add", authSeller, multipleUpload, addProduct);
 router.get("/get", getAllProducts);
 router.get("/:id", getProductById);
 router.post("/stock", authSeller, changeStock);

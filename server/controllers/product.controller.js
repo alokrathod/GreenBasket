@@ -1,25 +1,38 @@
 import Product from "../models/product.model.js";
+import cloudinary from "../config/cloudinary.js";
+import getDataUri from "../config/dataURI.js";
 
 // @desc    Add products
 // @route   POST /api/product/add
 export const addProduct = async (req, res) => {
   try {
     const { name, price, offerPrice, description, category } = req.body;
-    const image = req.files?.map((file) => file.filename);
 
+    // Only handle files from req.files.file
     if (
       !name ||
       !price ||
       !offerPrice ||
       !description ||
       !category ||
-      !image ||
-      image.length === 0
+      !req.files ||
+      !req.files.file ||
+      req.files.file.length === 0
     ) {
       return res.status(400).json({
         message: "All fields including images are required",
         success: false,
       });
+    }
+
+    // Convert files to DataURIs and upload to Cloudinary
+    const imageUrls = [];
+    for (const file of req.files.file) {
+      const dataUri = getDataUri(file).content;
+      const uploadRes = await cloudinary.uploader.upload(dataUri, {
+        folder: "greenbasket/products",
+      });
+      imageUrls.push(uploadRes.secure_url);
     }
 
     const product = new Product({
@@ -28,7 +41,7 @@ export const addProduct = async (req, res) => {
       offerPrice,
       description,
       category,
-      image,
+      image: imageUrls,
     });
 
     const savedProduct = await product.save();
