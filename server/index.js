@@ -4,10 +4,12 @@ import cookieParser from "cookie-parser";
 import dotenv from "dotenv";
 dotenv.config();
 
+import connectDB from "./config/connectDB.js";
+
 const app = express();
 
 const allowedOrigins = [process.env.CLIENT_URL];
-const PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT || 8000;
 
 // middlewares
 app.use(express.json());
@@ -22,4 +24,5 @@ app.get("/", (req, res) => {
 // start the server
 app.listen(PORT, () => {
   console.log("Server is running on PORT:", PORT);
+  connectDB();
 });
