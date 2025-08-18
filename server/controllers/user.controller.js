@@ -4,7 +4,7 @@ import jwt from "jsonwebtoken";
 
 // @desc    user register/signup
 // @route   POST /api/user/register
-export const register = async (req, res) => {
+export const registerUser = async (req, res) => {
   try {
     const { name, email, password } = req.body();
 
@@ -64,7 +64,7 @@ export const register = async (req, res) => {
 
 // @desc    user login
 // @route   POST /api/user/login
-export const login = async (req, res) => {
+export const loginUser = async (req, res) => {
   try {
     const { email, password } = req.body();
 
@@ -118,7 +118,7 @@ export const login = async (req, res) => {
 
 // @desc    check user
 // @route   GET /api/user/is-auth
-export const checkAuth = async (req, res) => {
+export const checkAuthUser = async (req, res) => {
   try {
     const userId = req.user;
 
@@ -140,7 +140,7 @@ export const checkAuth = async (req, res) => {
 
 // @desc    user logout
 // @route   GET /api/user/logout
-export const logout = async (req, res) => {
+export const logoutUser = async (req, res) => {
   try {
     res.clearCookie("token", {
       httpOnly: true,

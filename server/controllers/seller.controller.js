@@ -2,7 +2,7 @@ import jwt from "jsonwebtoken";
 
 // @desc    seller login
 // @route   POST /api/seller/login
-export const sellerLogin = async (req, res) => {
+export const loginSeller = async (req, res) => {
   try {
     const { email, password } = req.body();
 
@@ -44,7 +44,7 @@ export const sellerLogin = async (req, res) => {
 
 // @desc    check seller
 // @route   GET /api/seller/is-auth
-export const checkAuth = async (req, res) => {
+export const checkAuthSeller = async (req, res) => {
   try {
     res.status(200).json({
       success: true,
@@ -58,7 +58,7 @@ export const checkAuth = async (req, res) => {
 
 // @desc    seller logout
 // @route   GET /api/seller/logout
-export const logout = async (req, res) => {
+export const logoutSeller = async (req, res) => {
   try {
     res.clearCookie("sellerToken", {
       httpOnly: true,

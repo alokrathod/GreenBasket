@@ -2,7 +2,7 @@ import Order from "../models/order.model.js";
 import Product from "../models/product.model.js";
 
 // @desc    Place a new order (COD)
-// @route   POST /api/order
+// @route   POST /api/order/cod
 export const placeOrder = async (req, res) => {
   try {
     const userId = req.user;
@@ -53,7 +53,7 @@ export const placeOrder = async (req, res) => {
 };
 
 // @desc    Get all orders for a user
-// @route   GET /api/order/user/:userId
+// @route   GET /api/order/:userId
 export const getUserOrders = async (req, res) => {
   try {
     const userId = req.user;
@@ -71,7 +71,7 @@ export const getUserOrders = async (req, res) => {
 };
 
 // @desc    Get all orders (admin/seller)
-// @route   GET /api/order
+// @route   GET /api/order/seller
 export const getAllOrders = async (req, res) => {
   try {
     const orders = await Order.find({
