@@ -2,6 +2,8 @@ import React, { useContext, useState } from "react";
 import { assets, categories } from "../../assets/assets";
 import { AppContext } from "../../context/AppContext";
 import toast from "react-hot-toast";
+import axios from "axios";
+import { BACKEND_URL } from "../../constants/constants";
 
 const AddProduct = () => {
   const { axios } = useContext(AppContext);
@@ -29,7 +31,10 @@ const AddProduct = () => {
         formData.append("image", files[i]);
       }
 
-      const { data } = await axios.post("/api/seller/add", formData);
+      const { data } = await axios.post(
+        `${BACKEND_URL}/api/seller/add`,
+        formData
+      );
 
       if (data.success) {
         toast.success(data.message);

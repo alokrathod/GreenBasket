@@ -3,9 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { dummyProducts } from "../assets/assets";
 import toast from "react-hot-toast";
 import axios from "axios";
-
-axios.defaults.baseURL = import.meta.env.BACKEND_URL;
-axios.defaults.withCredentials = true;
+import { FRONTEND_URL } from "../constants/constants";
 
 export const AppContext = createContext(null);
 
@@ -21,7 +19,7 @@ const AppContextProvider = ({ children }) => {
   // check seller status
   const fetchSeller = async () => {
     try {
-      const { data } = await axios.get("/api/seller/is-auth");
+      const { data } = await axios.get(`${FRONTEND_URL}/api/seller/is-auth`);
       if (data.success) {
         setIsSeller(true);
       } else {
@@ -35,7 +33,7 @@ const AppContextProvider = ({ children }) => {
   // fetch user auth status ,user Data and cart items
   const fetchUser = async () => {
     try {
-      const { data } = await axios.get("/api/user/is-auth");
+      const { data } = await axios.get(`${FRONTEND_URL}/api/user/is-auth`);
       if (data.success) {
         setUser(data.user);
         setCartItems(data.user.cart);
@@ -50,7 +48,7 @@ const AppContextProvider = ({ children }) => {
   // fetch all products data
   const fetchProducts = async () => {
     try {
-      const { data } = await axios.get("/api/products/get");
+      const { data } = await axios.get(`${FRONTEND_URL}/api/products/get`);
       if (data.success) {
         setProducts(data.products);
       } else {
@@ -139,7 +137,6 @@ const AppContextProvider = ({ children }) => {
     cartItems,
     searchQuery,
     setSearchQuery,
-    axios,
     fetchProducts,
     fetchSeller,
     fetchUser,

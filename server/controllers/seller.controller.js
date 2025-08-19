@@ -4,7 +4,7 @@ import jwt from "jsonwebtoken";
 // @route   POST /api/seller/login
 export const loginSeller = async (req, res) => {
   try {
-    const { email, password } = req.body();
+    const { email, password } = req.body;
 
     if (!email || !password) {
       return res

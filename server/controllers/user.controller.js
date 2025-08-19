@@ -6,7 +6,7 @@ import jwt from "jsonwebtoken";
 // @route   POST /api/user/register
 export const registerUser = async (req, res) => {
   try {
-    const { name, email, password } = req.body();
+    const { name, email, password } = req.body;
 
     if (!name || !email || !password) {
       return res
@@ -66,7 +66,7 @@ export const registerUser = async (req, res) => {
 // @route   POST /api/user/login
 export const loginUser = async (req, res) => {
   try {
-    const { email, password } = req.body();
+    const { email, password } = req.body;
 
     if (!email || !password) {
       return res
