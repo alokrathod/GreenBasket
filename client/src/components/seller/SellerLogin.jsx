@@ -1,8 +1,9 @@
 import React, { useContext, useEffect, useState } from "react";
 import { AppContext } from "../../context/AppContext";
+import toast from "react-hot-toast";
 
 const SellerLogin = () => {
-  const { navigate, isSeller, setIsSeller } = useContext(AppContext);
+  const { navigate, isSeller, setIsSeller, axios } = useContext(AppContext);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
@@ -13,10 +14,24 @@ const SellerLogin = () => {
     }
   }, [isSeller]);
 
-  const submitHandler = (e) => {
-    e.preventDefault();
-    setIsSeller(true);
-    console.log("email", email, "password", password);
+  const submitHandler = async (e) => {
+    try {
+      e.preventDedault();
+      const { data } = await axios.post("/api/seller/login", {
+        email,
+        password,
+      });
+      if (data.success) {
+        setIsSeller(true);
+        toast.success("Welcome Admin!");
+        navigate("/seller");
+      } else {
+        toast.error(data.message);
+      }
+    } catch (error) {
+      console.log(error);
+      toast.error("Internal server error. Please try later");
+    }
   };
 
   return (

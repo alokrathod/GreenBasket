@@ -3,8 +3,8 @@ import {
   checkAuthSeller,
   loginSeller,
   logoutSeller,
-} from "../controllers/seller.controller";
-import authSeller from "../middlewares/authSeller.middleware";
+} from "../controllers/seller.controller.js";
+import authSeller from "../middlewares/authSeller.middleware.js";
 
 const router = express.Router();
 

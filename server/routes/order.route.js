@@ -4,8 +4,8 @@ import {
   getUserOrders,
   placeOrder,
 } from "../controllers/order.controller.js";
-import authSeller from "../middlewares/authSeller.middleware";
-import authUser from "../middlewares/authUser.middleware";
+import authSeller from "../middlewares/authSeller.middleware.js";
+import authUser from "../middlewares/authUser.middleware.js";
 
 const router = express.Router();
 

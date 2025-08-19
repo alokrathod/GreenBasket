@@ -1,7 +1,11 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { assets, categories } from "../../assets/assets";
+import { AppContext } from "../../context/AppContext";
+import toast from "react-hot-toast";
 
 const AddProduct = () => {
+  const { axios } = useContext(AppContext);
+
   const [files, setFiles] = useState([]);
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
@@ -9,8 +13,39 @@ const AddProduct = () => {
   const [price, setPrice] = useState("");
   const [offerPrice, setOfferPrice] = useState("");
 
-  const submitHandler = (e) => {
-    e.preventDefault();
+  const submitHandler = async (e) => {
+    try {
+      e.preventDefault();
+
+      const formData = new FormData();
+
+      formData.append("name", name);
+      formData.append("description", description);
+      formData.append("category", category);
+      formData.append("price", price);
+      formData.append("offerPrice", offerPrice);
+
+      for (let i = 0; i < files.length(); i++) {
+        formData.append("image", files[i]);
+      }
+
+      const { data } = await axios.post("/api/seller/add", formData);
+
+      if (data.success) {
+        toast.success(data.message);
+        setName("");
+        setDescription("");
+        setCategory("");
+        setPrice("");
+        setOfferPrice("");
+        setFiles([]);
+      } else {
+        toast.error(data.message);
+      }
+    } catch (error) {
+      console.log(error);
+      toast.error("Internal server error, please try later");
+    }
   };
 
   return (
