@@ -104,7 +104,7 @@ export const getProductById = async (req, res) => {
 };
 
 // @desc    update the stock
-// @route   PUT /api/product/stock
+// @route   POST /api/product/stock
 export const changeStock = async (req, res) => {
   try {
     const { id, inStock } = req.body;

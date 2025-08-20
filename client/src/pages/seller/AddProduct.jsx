@@ -6,8 +6,6 @@ import axios from "axios";
 import { BACKEND_URL } from "../../constants/constants";
 
 const AddProduct = () => {
-  const { axios } = useContext(AppContext);
-
   const [files, setFiles] = useState([]);
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
@@ -20,20 +18,21 @@ const AddProduct = () => {
       e.preventDefault();
 
       const formData = new FormData();
-
       formData.append("name", name);
       formData.append("description", description);
       formData.append("category", category);
       formData.append("price", price);
       formData.append("offerPrice", offerPrice);
 
-      for (let i = 0; i < files.length(); i++) {
-        formData.append("image", files[i]);
-      }
+      // Append each image with the key "file"
+      files.forEach((img) => {
+        if (img) formData.append("file", img);
+      });
 
       const { data } = await axios.post(
-        `${BACKEND_URL}/api/seller/add`,
-        formData
+        `${BACKEND_URL}/api/product/add`,
+        formData,
+        { withCredentials: true }
       );
 
       if (data.success) {

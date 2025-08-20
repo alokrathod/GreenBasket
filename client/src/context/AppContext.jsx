@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { dummyProducts } from "../assets/assets";
 import toast from "react-hot-toast";
 import axios from "axios";
-import { FRONTEND_URL } from "../constants/constants";
+import { BACKEND_URL, FRONTEND_URL } from "../constants/constants";
 
 export const AppContext = createContext(null);
 
@@ -48,7 +48,7 @@ const AppContextProvider = ({ children }) => {
   // fetch all products data
   const fetchProducts = async () => {
     try {
-      const { data } = await axios.get(`${FRONTEND_URL}/api/products/get`);
+      const { data } = await axios.get(`${BACKEND_URL}/api/product/get`);
       if (data.success) {
         setProducts(data.products);
       } else {
@@ -58,6 +58,7 @@ const AppContextProvider = ({ children }) => {
       console.log("Error in fetchProducts AppContext", error);
       toast.error("Internal server error, please try later");
     }
+    // setProducts(dummyProducts);
   };
 
   // add items to cart
@@ -118,6 +119,8 @@ const AppContextProvider = ({ children }) => {
 
   useEffect(() => {
     fetchProducts();
+    fetchSeller();
+    fetchUser();
   }, []);
 
   const value = {
